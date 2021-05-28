@@ -1,0 +1,37 @@
+body {
+  background-color: blanchedalmond;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.grid-wrap {
+  height: 100vh;
+  margin: 0;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  width: 800px;
+  border: 1px solid darkgrey;
+}
+
+.grid div {
+  border: 1px solid darkgrey;
+  flex-grow: 1;
+  height: 5%;
+  width: 5%;
+}
+
+.grid div.dude {
+  background-image: url("Red/redfront.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
