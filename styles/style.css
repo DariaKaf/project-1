@@ -38,7 +38,7 @@ body {
 }
 
 .grid div.obstacle-type-one {
-  background-image: url("Blue/blueleft.png");
+  background-image: url("../assets/Blue/blueright.png");
   background-repeat: no-repeat;
   background-size: contain;
 }

@@ -30,12 +30,15 @@ function init() {
       squares.push(square)
     }
     addPlayer(playerCharacterStartPosition)
-    addObstacleOne(ObsTypeOneStartPosition)  //! This is only for type one
+    addObstacleOne(ObsTypeOneStartPosition) //! This is only for type one
+    obstOneMovement()  //! This is only for type one 
+    
   }
 
   //* Add player character to grid
   function addPlayer(position) {
     squares[position].classList.add(playerCharacter)
+    
   }
 
   // * Remove player character from grid
@@ -48,15 +51,15 @@ function init() {
     const key = event.keyCode
     removePlayer(playerCharacterCurrentPosition)
     if (key === 39 && playerCharacterCurrentPosition % width !== width - 1) {
-      playerCharacterCurrentPosition++
+      playerCharacterCurrentPosition++  //RIGHT KEY
     } else if (key === 37 && playerCharacterCurrentPosition % width !== 0) {
-      playerCharacterCurrentPosition--
+      playerCharacterCurrentPosition--  //LEFT KEY
     } else if (key === 38 && playerCharacterCurrentPosition >= width) {
-      playerCharacterCurrentPosition -= width
+      playerCharacterCurrentPosition -= width // UP KEY
     } else if (key === 40 && playerCharacterCurrentPosition + width <= width * width - 1) {
-      playerCharacterCurrentPosition += width
+      playerCharacterCurrentPosition += width // DOES KEY
     } else {
-      console.log('NO SUCH KEY')
+      console.log('OOPS NOT THERE')
     }
     addPlayer(playerCharacterCurrentPosition)
     
@@ -75,14 +78,21 @@ function init() {
     squares[ObsOnePosition].classList.remove(ObstaclesTypeOne)
   }
   //! This is only for type one
-  function obsatacleTypeOneMovement() {
-    removeObstacleOne(ObsOnePosition)
+  function obstOneMovement() {
+    const timerOne = setInterval(() => {
+      if (ObsTypeOneCurrentPosition % width !== width - 1) {
+        removeObstacleOne(ObsTypeOneCurrentPosition)
+        ObsTypeOneCurrentPosition++
+        
+      } else {
+        clearInterval(timerOne)
+      }
+      addObstacleOne(ObsTypeOneCurrentPosition)
+    }, 200)
+    
   }
 
   document.addEventListener('keydown', handleKeyStroke)
-
-
-
   createGrid(playerCharacterStartPosition)
 
 
