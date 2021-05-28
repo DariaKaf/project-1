@@ -11,6 +11,13 @@ function init() {
   const playerCharacterStartPosition = 0
   let playerCharacterCurrentPosition = 0
 
+  const ObstaclesTypeOne = 'obstacle-type-one'
+  const ObstaclesTypeTwo = 'obstacle-type-two'
+  const ObstaclesTypeThree = 'obstacle-type-three'
+  const ObsTypeOnePosition = 'obst-type-one-position'
+  const ObsTypeTwoPosition = 'obst-type-two-position'
+  const ObsTypeThreePosition = 'obst-type-three-position'
+
   // * Making the grid
   function createGrid(playerCharacterStartPosition) {
     for (let i = 0; i < squareCount; i++) {
