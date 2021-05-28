@@ -40,7 +40,8 @@ Would use Keyup -->
     Find a way to clump together divs and track their position - should allow for detection collision on all squares in class.
     ^^^^^ NEED THIS ANYWAY TO BUILD OBSTACLE FORMATIONS
 
-* GENERATE AND MOVE OBSTACLES
+* GENERATE AND MOVE OBSTACLES -----
+----- THESE TO BE INCORPORATED INTO CREATE GRID??? ----
   GENERATE
     const ObstaclesTypeOne = 'obstacleTypeOne'
     const ObstaclesTypeTwo = 'obstacleTypeTwo'

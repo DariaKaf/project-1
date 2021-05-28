@@ -8,15 +8,18 @@ function init() {
   const squares = []
 
   const playerCharacter = 'dude'
-  const playerCharacterStartPosition = 0
-  let playerCharacterCurrentPosition = 0
+  const playerCharacterStartPosition = 332
+  let playerCharacterCurrentPosition = 332
 
   const ObstaclesTypeOne = 'obstacle-type-one'
   const ObstaclesTypeTwo = 'obstacle-type-two'
   const ObstaclesTypeThree = 'obstacle-type-three'
-  const ObsTypeOnePosition = 'obst-type-one-position'
-  const ObsTypeTwoPosition = 'obst-type-two-position'
-  const ObsTypeThreePosition = 'obst-type-three-position'
+  let ObsTypeOneStartPosition = 266
+  let ObsTypeOneCurrentPosition = 266
+  let ObsTypeTwoStartPosition = 133
+  let ObsTypeTwoCurrentPosition = 133
+  let ObsTypeThreeStartPosition = 38
+  let ObsTypeThreeCurrentPosition = 38
 
   // * Making the grid
   function createGrid(playerCharacterStartPosition) {
@@ -27,6 +30,7 @@ function init() {
       squares.push(square)
     }
     addPlayer(playerCharacterStartPosition)
+    addObstacleOne(ObsTypeOneStartPosition)  //! This is only for type one
   }
 
   //* Add player character to grid
@@ -58,9 +62,26 @@ function init() {
     
   }
 
-
+  // * ADD OBSTACLES
+  
+  //* Add obstacles type one to grid  
+  //! This is only for type one
+  function addObstacleOne(ObsOnePosition) {
+    squares[ObsOnePosition].classList.add(ObstaclesTypeOne)
+  }
+  //! This is only for type one
+  // * Remove obstacles type one from grid
+  function removeObstacleOne(ObsOnePosition) {
+    squares[ObsOnePosition].classList.remove(ObstaclesTypeOne)
+  }
+  //! This is only for type one
+  function obsatacleTypeOneMovement() {
+    removeObstacleOne(ObsOnePosition)
+  }
 
   document.addEventListener('keydown', handleKeyStroke)
+
+
 
   createGrid(playerCharacterStartPosition)
 

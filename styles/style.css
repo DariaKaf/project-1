@@ -19,11 +19,12 @@ body {
   align-items: center;
   height: 600px;
   width: 800px;
-  border: 1px solid darkgrey;
+  
 }
 
 .grid div {
-  border: 1px solid darkgrey;
+  border: 1px solid rgba(148, 148, 148, 0.5);
+  color: rgba(148, 148, 148, 0.5);
   flex-grow: 1;
   height: 5%;
   width: 5%;
@@ -33,5 +34,11 @@ body {
   background-image: url("Red/redfront.png");
   background-repeat: no-repeat;
   background-size: contain;
-  cursor: pointer;
+  
+}
+
+.grid div.obstacle-type-one {
+  background-image: url("Blue/blueleft.png");
+  background-repeat: no-repeat;
+  background-size: contain;
 }
