@@ -31,7 +31,7 @@ body {
 }
 
 .grid div.dude {
-  background-image: url("Red/redfront.png");
+  background-image: url("../assets/Red/redback.png");
   background-repeat: no-repeat;
   background-size: contain;
   

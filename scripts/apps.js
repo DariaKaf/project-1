@@ -80,12 +80,15 @@ function init() {
   //! This is only for type one
   function obstOneMovement() {
     const timerOne = setInterval(() => {
-      if (ObsTypeOneCurrentPosition % width !== width - 1) {
+      //! Need to adjust condition so that when obs reaches last width sqaure,
+      //! it reverses movement.
+      if (ObsTypeOneCurrentPosition !== 284) {
         removeObstacleOne(ObsTypeOneCurrentPosition)
         ObsTypeOneCurrentPosition++
-        
-      } else {
-        clearInterval(timerOne)
+
+      } else if (ObsTypeOneCurrentPosition % width === width - 1) {
+        removeObstacleOne(ObsTypeOneCurrentPosition)
+        ObsTypeOneCurrentPosition--
       }
       addObstacleOne(ObsTypeOneCurrentPosition)
     }, 200)
