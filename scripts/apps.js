@@ -2,11 +2,17 @@ function init() {
 
   // * Variables
   const grid = document.querySelector('.grid')
+  const display = document.querySelector('.display')
 
   const width = 19
   const squareCount = width * width
   const squares = []
+  
 
+  let lives = 3
+  let score = 0 // NICE TO HAVE.
+
+  const livesLeft = 'life'
   const playerCharacter = 'dude'
   const playerCharacterStartPosition = 332
   let playerCharacterCurrentPosition = 332
@@ -14,7 +20,7 @@ function init() {
   const ObstaclesTypeOne = 'obstacle-type-one'
   const ObstaclesTypeTwo = 'obstacle-type-two'
   const ObstaclesTypeThree = 'obstacle-type-three'
-  let ObsTypeOneStartPosition = 266
+  const ObsTypeOneStartPosition = 266
   let ObsTypeOneCurrentPosition = 266
   let ObsTypeOneDirection = 1   // 1 is right, -1 is left.
   let ObsTypeTwoStartPosition = 133
@@ -29,12 +35,16 @@ function init() {
       square.innerText = i
       grid.appendChild(square)
       squares.push(square)
-    }
+    }  
+    
     addPlayer(playerCharacterStartPosition)
     addObstacleOne(ObsTypeOneStartPosition) //! This is only for type one
     obstOneMovement()  //! This is only for type one 
     
   }
+
+  
+
 
   //* Add player character to grid
   function addPlayer(position) {
@@ -81,8 +91,6 @@ function init() {
   //! This is only for type one
   function obstOneMovement() {
     const timerOne = setInterval(() => {
-      //! Need to adjust condition so that when obs reaches last width sqaure,
-      //! it reverses movement.
       const ObstAtStart = ObsTypeOneCurrentPosition === ObsTypeOneStartPosition
       const ObstAtEnd = ObsTypeOneCurrentPosition % width === width - 1
       
@@ -101,20 +109,15 @@ function init() {
         removeObstacleOne(ObsTypeOneCurrentPosition)
         ObsTypeOneCurrentPosition--
       } 
-      
-      
-      
-      //else if (ObsTypeOneCurrentPosition % width === width - 1) {
-      //   // //while ((ObsTypeOneCurrentPosition % width === width - 1) || (ObsTypeOneCurrentPosition % width !== width - 1)){
-      //   //   removeObstacleOne(ObsTypeOneCurrentPosition)
-      //   //   ObsTypeOneCurrentPosition--
-      //   }
-      
-      
+      // * COLLISION DETECTION
+      if (ObsTypeOneCurrentPosition === playerCharacterCurrentPosition){
+        console.log('Wham!') // COLLISION ANIMATION HERE.
+      }
       addObstacleOne(ObsTypeOneCurrentPosition)
-    }, 200)
-    
+    }, 100)
   }
+
+  
 
   document.addEventListener('keydown', handleKeyStroke)
   createGrid(playerCharacterStartPosition)

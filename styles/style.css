@@ -7,6 +7,18 @@ body {
   margin: 0;
 }
 
+.displays { /* Correct code doesn't display in broswer hmm.. */
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: baseline;
+  width: 100%;
+  border: 1px dotted grey;
+  border-radius: 2px;
+  padding: 3px;
+}
+
 .grid-wrap {
   height: 100vh;
   margin: 0;
