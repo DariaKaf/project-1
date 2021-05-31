@@ -16,6 +16,7 @@ function init() {
   const ObstaclesTypeThree = 'obstacle-type-three'
   let ObsTypeOneStartPosition = 266
   let ObsTypeOneCurrentPosition = 266
+  let ObsTypeOneDirection = 1   // 1 is right, -1 is left.
   let ObsTypeTwoStartPosition = 133
   let ObsTypeTwoCurrentPosition = 133
   let ObsTypeThreeStartPosition = 38
@@ -82,14 +83,34 @@ function init() {
     const timerOne = setInterval(() => {
       //! Need to adjust condition so that when obs reaches last width sqaure,
       //! it reverses movement.
-      if (ObsTypeOneCurrentPosition !== 284) {
+      const ObstAtStart = ObsTypeOneCurrentPosition === ObsTypeOneStartPosition
+      const ObstAtEnd = ObsTypeOneCurrentPosition % width === width - 1
+      
+      if (ObstAtStart) {
         removeObstacleOne(ObsTypeOneCurrentPosition)
         ObsTypeOneCurrentPosition++
-
-      } else if (ObsTypeOneCurrentPosition % width === width - 1) {
+        ObsTypeOneDirection = 1
+      } else if (ObstAtEnd) {
         removeObstacleOne(ObsTypeOneCurrentPosition)
         ObsTypeOneCurrentPosition--
-      }
+        ObsTypeOneDirection = -1
+      } else if (!ObstAtEnd && ObsTypeOneDirection === 1) {
+        removeObstacleOne(ObsTypeOneCurrentPosition)
+        ObsTypeOneCurrentPosition++
+      } else if (!ObstAtEnd && ObsTypeOneDirection === -1) {
+        removeObstacleOne(ObsTypeOneCurrentPosition)
+        ObsTypeOneCurrentPosition--
+      } 
+      
+      
+      
+      //else if (ObsTypeOneCurrentPosition % width === width - 1) {
+      //   // //while ((ObsTypeOneCurrentPosition % width === width - 1) || (ObsTypeOneCurrentPosition % width !== width - 1)){
+      //   //   removeObstacleOne(ObsTypeOneCurrentPosition)
+      //   //   ObsTypeOneCurrentPosition--
+      //   }
+      
+      
       addObstacleOne(ObsTypeOneCurrentPosition)
     }, 200)
     
