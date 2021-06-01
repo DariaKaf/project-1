@@ -2,7 +2,7 @@ function init() {
 
   // * Variables
   const grid = document.querySelector('.grid')
-  const display = document.querySelector('.display')
+  const livesLeft = document.querySelector('.livesLeft')
 
   const width = 19
   const squareCount = width * width
@@ -10,9 +10,9 @@ function init() {
   
 
   let lives = 3
-  let score = 0 // NICE TO HAVE.
+  //let score = 0 // NICE TO HAVE.
 
-  const livesLeft = 'life'
+  // maybe don't need this? const livesLeft = 'lives'
   const playerCharacter = 'dude'
   const playerCharacterStartPosition = 332
   let playerCharacterCurrentPosition = 332
@@ -49,7 +49,6 @@ function init() {
   //* Add player character to grid
   function addPlayer(position) {
     squares[position].classList.add(playerCharacter)
-    
   }
 
   // * Remove player character from grid
@@ -78,7 +77,7 @@ function init() {
 
   // * ADD OBSTACLES
   
-  //* Add obstacles type one to grid  
+  //* Add obstacle type one to grid  
   //! This is only for type one
   function addObstacleOne(ObsOnePosition) {
     squares[ObsOnePosition].classList.add(ObstaclesTypeOne)
@@ -112,6 +111,12 @@ function init() {
       // * COLLISION DETECTION
       if (ObsTypeOneCurrentPosition === playerCharacterCurrentPosition){
         console.log('Wham!') // COLLISION ANIMATION HERE.
+        // Add sprite changes here
+        removePlayer(playerCharacterCurrentPosition)
+        playerCharacterCurrentPosition = playerCharacterStartPosition
+        addPlayer(playerCharacterStartPosition)
+        lives--
+        livesLeft.innerText = lives
       }
       addObstacleOne(ObsTypeOneCurrentPosition)
     }, 100)
