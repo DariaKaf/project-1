@@ -20,11 +20,11 @@ function init() {
   const ObstaclesTypeOne = 'obstacle-type-one'
   const ObstaclesTypeTwo = 'obstacle-type-two'
   const ObstaclesTypeThree = 'obstacle-type-three'
-  const ObsTypeOneStartPosition = 266
-  let ObsTypeOneCurrentPosition = 266
+  const ObsTypeOneStartPosition = 304
+  let ObsTypeOneCurrentPosition = 304
   let ObsTypeOneDirection = 1   // 1 is right, -1 is left.
-  let ObsTypeTwoStartPosition = 133
-  let ObsTypeTwoCurrentPosition = 133
+  let ObsTypeTwoStartPosition = 284
+  let ObsTypeTwoCurrentPosition = 284
   let ObsTypeThreeStartPosition = 38
   let ObsTypeThreeCurrentPosition = 38
 
@@ -39,6 +39,7 @@ function init() {
     
     addPlayer(playerCharacterStartPosition)
     addObstacleOne(ObsTypeOneStartPosition) //! This is only for type one
+    addObstacleTwo(ObsTypeTwoStartPosition)
     obstOneMovement()  //! This is only for type one 
     
   }
@@ -83,10 +84,20 @@ function init() {
     squares[ObsOnePosition].classList.add(ObstaclesTypeOne)
   }
   //! This is only for type one
-  // * Remove obstacles type one from grid
+  // * Remove obstacle type one from grid
   function removeObstacleOne(ObsOnePosition) {
     squares[ObsOnePosition].classList.remove(ObstaclesTypeOne)
   }
+
+  // Add Obstacle Type Two
+  function addObstacleTwo(ObsTwoPosition) {
+    squares[ObsTwoPosition].classList.add(ObstaclesTypeTwo)
+  }
+  // * Remove obstacle type Two from grid
+  function removeObstacleTwo(ObsTwoPosition) {
+    squares[ObsTwoPosition].classList.remove(ObstaclesTypeTwo)
+  }
+
   //! This is only for type one
   function obstOneMovement() {
     const timerOne = setInterval(() => {
@@ -108,10 +119,12 @@ function init() {
         removeObstacleOne(ObsTypeOneCurrentPosition)
         ObsTypeOneCurrentPosition--
       } 
-      // * COLLISION DETECTION
+      // * COLLISION DETECTION WHILE HAVE LIVES
       if (ObsTypeOneCurrentPosition === playerCharacterCurrentPosition){
         console.log('Wham!') // COLLISION ANIMATION HERE.
-        // Add sprite changes here
+        
+        // Add sprite changes here //
+
         removePlayer(playerCharacterCurrentPosition)
         playerCharacterCurrentPosition = playerCharacterStartPosition
         addPlayer(playerCharacterStartPosition)
@@ -119,7 +132,7 @@ function init() {
         livesLeft.innerText = lives
       }
       addObstacleOne(ObsTypeOneCurrentPosition)
-    }, 100)
+    }, 200)
   }
 
   

@@ -7,7 +7,7 @@ body {
   margin: 0;
 }
 
-.display { /* Correct code doesn't display in broswer hmm.. */
+.header-wrap { /* Correct code doesn't display in broswer hmm.. */
   height: 10vh;
   width: 80vh;
   padding: 3px;
@@ -20,6 +20,7 @@ body {
 .grid-wrap {
   height: 100vh;
   margin: 0;
+  background-image: url('../assets/city_scape_and_assets_inprogress.png');
 }
 
 .grid {
@@ -48,7 +49,13 @@ body {
 }
 
 .grid div.obstacle-type-one {
-  background-image: url("../assets/Blue/blueright.png");
+  background-image: url("../assets/Blue/bluerightwalk1.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.grid div.obstacle-type-two {
+  background-image: url("../assets/cars/red-car-left.png");
   background-repeat: no-repeat;
   background-size: contain;
 }
