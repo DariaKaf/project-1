@@ -19,11 +19,15 @@ function init() {
   const ObstaclesTypeOne = 'obstacle-type-one'
   const ObstaclesTypeTwo = 'obstacle-type-two'
   const ObstaclesTypeThree = 'obstacle-type-three'
+  
   const ObsTypeOneStartPosition = 304
   let ObsTypeOneCurrentPosition = 304
   let ObsTypeOneDirection = 1   // 1 is right, -1 is left.
+  
   let ObsTypeTwoStartPosition = 284
   let ObsTypeTwoCurrentPosition = 284
+  let ObsTypeTwoDirection = 1 
+
   let ObsTypeThreeStartPosition = 38
   let ObsTypeThreeCurrentPosition = 38
 
@@ -37,10 +41,10 @@ function init() {
     }  
     
     addPlayer(playerCharacterStartPosition)
-    addObstacleOne(ObsTypeOneStartPosition) //! This is only for type one
+    addObstacleOne(ObsTypeOneStartPosition) 
     addObstacleTwo(ObsTypeTwoStartPosition)
-    obstOneMovement()  //! This is only for type one 
-    
+    obstOneMovement()  
+    obstTwoMovement()
   }
 
   
@@ -75,27 +79,30 @@ function init() {
 
   // * ADD OBSTACLES
   
-  //* Add obstacle type one to grid  
-  //! This is only for type one
+  //* Add obstacle type ONE to grid  
   function addObstacleOne(ObsOnePosition) {
     squares[ObsOnePosition].classList.add(ObstaclesTypeOne)
   }
-  //! This is only for type one
-  // * Remove obstacle type one from grid
+
+  // * Remove obstacle type ONE from grid
   function removeObstacleOne(ObsOnePosition) {
     squares[ObsOnePosition].classList.remove(ObstaclesTypeOne)
   }
 
-  // Add Obstacle Type Two
+  // * Add Obstacle Type TWO
   function addObstacleTwo(ObsTwoPosition) {
     squares[ObsTwoPosition].classList.add(ObstaclesTypeTwo)
   }
-  // * Remove obstacle type Two from grid
+  // * Remove obstacle type TWO from grid
   function removeObstacleTwo(ObsTwoPosition) {
     squares[ObsTwoPosition].classList.remove(ObstaclesTypeTwo)
   }
 
-  //! This is only for type one
+
+
+
+  
+  // * Obst ONE movement
   function obstOneMovement() {
     const timerOne = setInterval(() => {
       const ObstAtStart = ObsTypeOneCurrentPosition === ObsTypeOneStartPosition
@@ -116,31 +123,54 @@ function init() {
         removeObstacleOne(ObsTypeOneCurrentPosition)
         ObsTypeOneCurrentPosition--
       } 
-      // * COLLISION DETECTION WHILE HAVE LIVES
-      // * Can take this function out of the timer and change 'ObsTypeOne' to general Obs CLASS if end up using that.
       if (ObsTypeOneCurrentPosition === playerCharacterCurrentPosition){
-        console.log('Wham!') // COLLISION ANIMATION HERE.
-        // Add sprite changes here //
-        removePlayer(playerCharacterCurrentPosition)
-        playerCharacterCurrentPosition = playerCharacterStartPosition
-        addPlayer(playerCharacterStartPosition)
-        lives--
-        livesLeft.innerText = lives
-        if (lives === 0) {
-          resetGame()
-        }
-      } 
-      // * WIN
-      // * Need to find another way and place (outside of this timer) to call this function, for now here to test it.
-      if (playerCharacterCurrentPosition === 42) {
-        win()
+        collision()
       }
-
       addObstacleOne(ObsTypeOneCurrentPosition)
     }, 200)
   }
 
-  // * Reset Game after all lives lost
+  // * Obst TWO movement
+  function obstTwoMovement() {
+    const timerTwo = setInterval(() => {
+      const ObstAtStart = ObsTypeTwoCurrentPosition % width === width - 1 
+      const ObstAtEnd = ObsTypeTwoCurrentPosition === 266
+      
+      if (ObstAtStart) {
+        removeObstacleTwo(ObsTypeTwoCurrentPosition)
+        ObsTypeTwoCurrentPosition--
+        ObsTypeTwoDirection = -1
+      } else if (ObstAtEnd) {
+        removeObstacleTwo(ObsTypeTwoCurrentPosition)
+      } else if (!ObstAtEnd && ObsTypeTwoDirection === -1) {
+        removeObstacleTwo(ObsTypeTwoCurrentPosition)
+        ObsTypeTwoCurrentPosition--
+      }  
+      if (ObsTypeTwoCurrentPosition === playerCharacterCurrentPosition){
+        collision()
+      }
+      addObstacleTwo(ObsTypeTwoCurrentPosition)
+    }, 200)
+  }
+
+
+
+  // * COLLISION DETECTION WHILE HAVE LIVES
+  function collision() {
+    console.log('Wham!') // COLLISION ANIMATION HERE.
+    // Add sprite changes here //
+    removePlayer(playerCharacterCurrentPosition)
+    playerCharacterCurrentPosition = playerCharacterStartPosition
+    addPlayer(playerCharacterStartPosition)
+    lives--
+    livesLeft.innerText = lives
+    if (lives === 0) {
+      resetGame()
+    }
+  } 
+    
+  
+  // * RESET GAME AFTER ALL LIVES LOST OR PLAYER WON
   function resetGame() {
     console.log('game reset, player either lost 3 lives or got to the pub')
     lives = 3
@@ -154,7 +184,7 @@ function init() {
     
   }
 
-  // * Win game - you've reached the pub!
+  // * WIN GAME - Player reached the pub! Need ot find where to call this though.
   function win() {
     console.log('player reached the pub!')
     resetGame()
@@ -165,6 +195,48 @@ function init() {
 
 
 
+
+
+
+
+
+  // -------------------------------- //
+
+
+
+
+  // * CREATING CLASS FOR OBSTACLES * //
+  //! Abandoned for lack of time.
+
+  // class obstacle {
+  //   constructor(type) {
+  //     this.type = type
+  //   }
+  //   moveObstacle() {
+  //     const timerOne = setInterval(() => {
+  //       const ObstAtStart = ObsTypeOneCurrentPosition === ObsTypeOneStartPosition
+  //       const ObstAtEnd = ObsTypeOneCurrentPosition % width === width - 1
+        
+  //       if (ObstAtStart) {
+  //         removeObstacleOne(ObsTypeOneCurrentPosition)
+  //         ObsTypeOneCurrentPosition++
+  //         ObsTypeOneDirection = 1
+  //       } else if (ObstAtEnd) {
+  //         removeObstacleOne(ObsTypeOneCurrentPosition)
+  //         ObsTypeOneCurrentPosition--
+  //         ObsTypeOneDirection = -1
+  //       } else if (!ObstAtEnd && ObsTypeOneDirection === 1) {
+  //         removeObstacleOne(ObsTypeOneCurrentPosition)
+  //         ObsTypeOneCurrentPosition++
+  //       } else if (!ObstAtEnd && ObsTypeOneDirection === -1) {
+  //         removeObstacleOne(ObsTypeOneCurrentPosition)
+  //         ObsTypeOneCurrentPosition--
+  //       } 
+  //       addObstacleOne(ObsTypeOneCurrentPosition)
+  //     }, 200)
+  //   }
+  // }
+  // -------------------------------- //
 }
 
 window.addEventListener('DOMContentLoaded', init)
