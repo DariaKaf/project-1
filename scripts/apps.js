@@ -45,8 +45,6 @@ function init() {
   }
 
   
-
-
   //* Add player character to grid
   function addPlayer(position) {
     squares[position].classList.add(playerCharacter)
@@ -135,7 +133,10 @@ function init() {
     }, 200)
   }
 
-  
+  // * Reset Game after all lives lost
+  function resetGame() {
+    
+  }
 
   document.addEventListener('keydown', handleKeyStroke)
   createGrid(playerCharacterStartPosition)

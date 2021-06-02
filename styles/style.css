@@ -18,9 +18,10 @@ body {
 }
 
 .grid-wrap {
-  height: 100vh;
+  height: 600vh;
   margin: 0;
   background-image: url('../assets/city_scape_and_assets_inprogress.png');
+  background-repeat: no-repeat;
 }
 
 .grid {
@@ -45,7 +46,7 @@ body {
   background-image: url("../assets/Red/redback.png");
   background-repeat: no-repeat;
   background-size: contain;
-  
+  background-position: center;
 }
 
 .grid div.obstacle-type-one {
