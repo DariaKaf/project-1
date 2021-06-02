@@ -8,9 +8,8 @@ function init() {
   const squareCount = width * width
   const squares = []
   
-
   let lives = 3
-  //let score = 0 // NICE TO HAVE.
+  livesLeft.innerText = lives
 
   // maybe don't need this? const livesLeft = 'lives'
   const playerCharacter = 'dude'
@@ -118,24 +117,47 @@ function init() {
         ObsTypeOneCurrentPosition--
       } 
       // * COLLISION DETECTION WHILE HAVE LIVES
+      // * Can take this function out of the timer and change 'ObsTypeOne' to general Obs CLASS if end up using that.
       if (ObsTypeOneCurrentPosition === playerCharacterCurrentPosition){
         console.log('Wham!') // COLLISION ANIMATION HERE.
-        
         // Add sprite changes here //
-
         removePlayer(playerCharacterCurrentPosition)
         playerCharacterCurrentPosition = playerCharacterStartPosition
         addPlayer(playerCharacterStartPosition)
         lives--
         livesLeft.innerText = lives
+        if (lives === 0) {
+          resetGame()
+        }
+      } 
+      // * WIN
+      // * Need to find another way and place (outside of this timer) to call this function, for now here to test it.
+      if (playerCharacterCurrentPosition === 42) {
+        win()
       }
+
       addObstacleOne(ObsTypeOneCurrentPosition)
     }, 200)
   }
 
   // * Reset Game after all lives lost
   function resetGame() {
+    console.log('game reset, player either lost 3 lives or got to the pub')
+    lives = 3
+    removePlayer(playerCharacterCurrentPosition)
+    playerCharacterCurrentPosition = playerCharacterStartPosition
+    addPlayer(playerCharacterStartPosition)
+    removeObstacleOne(ObsTypeOneCurrentPosition)
+    ObsTypeOneCurrentPosition = ObsTypeOneStartPosition
+    addObstacleOne(ObsTypeOneStartPosition)
+    //removeObstacleTwo(ObsTypeTwoCurrentPosition)
     
+  }
+
+  // * Win game - you've reached the pub!
+  function win() {
+    console.log('player reached the pub!')
+    resetGame()
   }
 
   document.addEventListener('keydown', handleKeyStroke)
