@@ -60,3 +60,9 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+.grid div.obstacle-type-three {
+  background-image: url("../assets/cars/red-car-right.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}

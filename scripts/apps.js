@@ -24,12 +24,13 @@ function init() {
   let ObsTypeOneCurrentPosition = 304
   let ObsTypeOneDirection = 1   // 1 is right, -1 is left.
   
-  let ObsTypeTwoStartPosition = 284
+  const ObsTypeTwoStartPosition = 284
   let ObsTypeTwoCurrentPosition = 284
   let ObsTypeTwoDirection = 1 
 
-  let ObsTypeThreeStartPosition = 38
-  let ObsTypeThreeCurrentPosition = 38
+  const ObsTypeThreeStartPosition = 247
+  let ObsTypeThreeCurrentPosition = 247
+  let ObsTypeThreeDirection = 1 
 
   // * Making the grid
   function createGrid(playerCharacterStartPosition) {
@@ -45,6 +46,7 @@ function init() {
     addObstacleTwo(ObsTypeTwoStartPosition)
     obstOneMovement()  
     obstTwoMovement()
+    obstThreeMovement()
   }
 
   
@@ -83,7 +85,6 @@ function init() {
   function addObstacleOne(ObsOnePosition) {
     squares[ObsOnePosition].classList.add(ObstaclesTypeOne)
   }
-
   // * Remove obstacle type ONE from grid
   function removeObstacleOne(ObsOnePosition) {
     squares[ObsOnePosition].classList.remove(ObstaclesTypeOne)
@@ -96,6 +97,15 @@ function init() {
   // * Remove obstacle type TWO from grid
   function removeObstacleTwo(ObsTwoPosition) {
     squares[ObsTwoPosition].classList.remove(ObstaclesTypeTwo)
+  }
+
+  // * Add Obstacle Type THREE
+  function addObstacleThree(ObsTwoPosition) {
+    squares[ObsTwoPosition].classList.add(ObstaclesTypeThree)
+  }
+  // * Remove obstacle type THREE
+  function removeObstacleThree(ObsThreePosition) {
+    squares[ObsThreePosition].classList.remove(ObstaclesTypeThree)
   }
 
 
@@ -153,6 +163,26 @@ function init() {
     }, 200)
   }
 
+  // * Obst THREE movement
+  function obstThreeMovement() {
+    const timerThree = setInterval(() => {
+      const ObstAtStart = ObsTypeThreeStartPosition
+      const ObstAtEnd = ObsTypeThreeCurrentPosition % width === width - 1
+      
+      
+      if (ObstAtStart) {
+        removeObstacleThree(ObsTypeThreeCurrentPosition)
+        ObsTypeThreeCurrentPosition++
+        ObsTypeThreeDirection = 1
+      } else if (ObstAtEnd) {
+        removeObstacleThree(ObsTypeThreeCurrentPosition)
+      }
+      if (ObsTypeThreeCurrentPosition === playerCharacterCurrentPosition){
+        collision()
+      }
+      addObstacleThree(ObsTypeThreeCurrentPosition)
+    }, 200)
+  }
 
 
   // * COLLISION DETECTION WHILE HAVE LIVES
