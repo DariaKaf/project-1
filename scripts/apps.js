@@ -24,12 +24,12 @@ function init() {
   let ObsTypeOneCurrentPosition = 81
   let ObsTypeOneDirection = 1   // 1 is right, -1 is left.
   
-  const ObsTypeTwoStartPosition = 80
-  let ObsTypeTwoCurrentPosition = 80
+  const ObsTypeTwoStartPosition = 79
+  let ObsTypeTwoCurrentPosition = 79
   let ObsTypeTwoDirection = 1 
 
-  const ObsTypeThreeStartPosition = 63
-  let ObsTypeThreeCurrentPosition = 63
+  const ObsTypeThreeStartPosition = 60
+  let ObsTypeThreeCurrentPosition = 60
   let ObsTypeThreeDirection = 1 
 
   // * Making the grid
@@ -146,12 +146,13 @@ function init() {
   function obstTwoMovement() {
     const timerTwo = setInterval(() => {
       const ObstAtStart = ObsTypeTwoCurrentPosition % width === width - 1 
-      const ObstAtEnd = ObsTypeTwoCurrentPosition === 80
+      const ObstAtEnd = ObsTypeTwoCurrentPosition === 70
       
-      if (ObstAtStart) {
+      if (ObstAtStart && !ObstAtEnd) {
         removeObstacleTwo(ObsTypeTwoCurrentPosition)
         ObsTypeTwoCurrentPosition--
         ObsTypeTwoDirection = -1
+        
       } else if (ObstAtEnd) {
         removeObstacleTwo(ObsTypeTwoCurrentPosition)
       } else if (!ObstAtEnd && ObsTypeTwoDirection === -1) {
