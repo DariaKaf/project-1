@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: blanchedalmond;
   height: 100vh;
@@ -29,7 +33,6 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  height: 100%;
   height: 600px;
   width: 600px;
   
