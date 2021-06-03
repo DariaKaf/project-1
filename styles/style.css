@@ -18,7 +18,7 @@ body {
 }
 
 .grid-wrap {
-  height: 600vh;
+  height: 100vh;
   margin: 0;
   background-image: url('../assets/city_scape_and_assets_inprogress.png');
   background-repeat: no-repeat;
@@ -29,8 +29,9 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  height: 100%;
   height: 600px;
-  width: 800px;
+  width: 600px;
   
 }
 
@@ -38,8 +39,8 @@ body {
   border: 1px solid rgba(148, 148, 148, 0.5);
   color: rgba(148, 148, 148, 0.5);
   flex-grow: 1;
-  height: 5%;
-  width: 5%;
+  height: 10%;
+  width: 10%;
 
 }
 

@@ -4,7 +4,7 @@ function init() {
   const grid = document.querySelector('.grid')
   const livesLeft = document.querySelector('.livesLeft')
 
-  const width = 19
+  const width = 10
   const squareCount = width * width
   const squares = []
   
@@ -13,23 +13,23 @@ function init() {
 
 
   const playerCharacter = 'dude'
-  const playerCharacterStartPosition = 332
-  let playerCharacterCurrentPosition = 332
+  const playerCharacterStartPosition = 94
+  let playerCharacterCurrentPosition = 94
 
   const ObstaclesTypeOne = 'obstacle-type-one'
   const ObstaclesTypeTwo = 'obstacle-type-two'
   const ObstaclesTypeThree = 'obstacle-type-three'
   
-  const ObsTypeOneStartPosition = 304
-  let ObsTypeOneCurrentPosition = 304
+  const ObsTypeOneStartPosition = 81
+  let ObsTypeOneCurrentPosition = 81
   let ObsTypeOneDirection = 1   // 1 is right, -1 is left.
   
-  const ObsTypeTwoStartPosition = 284
-  let ObsTypeTwoCurrentPosition = 284
+  const ObsTypeTwoStartPosition = 80
+  let ObsTypeTwoCurrentPosition = 80
   let ObsTypeTwoDirection = 1 
 
-  const ObsTypeThreeStartPosition = 247
-  let ObsTypeThreeCurrentPosition = 247
+  const ObsTypeThreeStartPosition = 63
+  let ObsTypeThreeCurrentPosition = 63
   let ObsTypeThreeDirection = 1 
 
   // * Making the grid
@@ -64,19 +64,19 @@ function init() {
   function handleKeyStroke(event) {
     const key = event.keyCode
     removePlayer(playerCharacterCurrentPosition)
-    if (key === 39 && playerCharacterCurrentPosition % width !== width - 1) {
+    if (key === 39 && playerCharacterCurrentPosition % width - 1 !== width - 1) {
       playerCharacterCurrentPosition++  //RIGHT KEY
-    } else if (key === 37 && playerCharacterCurrentPosition % width !== 0) {
+    } else if (key === 37 && playerCharacterCurrentPosition % width !== 0 ) {
       playerCharacterCurrentPosition--  //LEFT KEY
     } else if (key === 38 && playerCharacterCurrentPosition >= width) {
-      playerCharacterCurrentPosition -= width // UP KEY
+      playerCharacterCurrentPosition -= width - 1 // UP KEY
     } else if (key === 40 && playerCharacterCurrentPosition + width <= width * width - 1) {
-      playerCharacterCurrentPosition += width // DOES KEY
+      playerCharacterCurrentPosition += width - 1 // DOWN KEY
     } else {
       console.log('OOPS NOT THERE')
     }
     addPlayer(playerCharacterCurrentPosition)
-    if (playerCharacterCurrentPosition === 47) {
+    if (playerCharacterCurrentPosition === width - 4) {
       win()
     }
   }
@@ -146,7 +146,7 @@ function init() {
   function obstTwoMovement() {
     const timerTwo = setInterval(() => {
       const ObstAtStart = ObsTypeTwoCurrentPosition % width === width - 1 
-      const ObstAtEnd = ObsTypeTwoCurrentPosition === 266
+      const ObstAtEnd = ObsTypeTwoCurrentPosition === 80
       
       if (ObstAtStart) {
         removeObstacleTwo(ObsTypeTwoCurrentPosition)
