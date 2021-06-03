@@ -11,7 +11,7 @@ function init() {
   let lives = 3
   livesLeft.innerText = lives
 
-  // maybe don't need this? const livesLeft = 'lives'
+
   const playerCharacter = 'dude'
   const playerCharacterStartPosition = 332
   let playerCharacterCurrentPosition = 332
@@ -76,7 +76,9 @@ function init() {
       console.log('OOPS NOT THERE')
     }
     addPlayer(playerCharacterCurrentPosition)
-    
+    if (playerCharacterCurrentPosition === 47) {
+      win()
+    }
   }
 
   // * ADD OBSTACLES
@@ -169,14 +171,13 @@ function init() {
       const ObstAtStart = ObsTypeThreeStartPosition
       const ObstAtEnd = ObsTypeThreeCurrentPosition % width === width - 1
       
-      
-      if (ObstAtStart) {
+      if (ObstAtStart && !ObstAtEnd) {
         removeObstacleThree(ObsTypeThreeCurrentPosition)
         ObsTypeThreeCurrentPosition++
         ObsTypeThreeDirection = 1
       } else if (ObstAtEnd) {
         removeObstacleThree(ObsTypeThreeCurrentPosition)
-      }
+      } 
       if (ObsTypeThreeCurrentPosition === playerCharacterCurrentPosition){
         collision()
       }
