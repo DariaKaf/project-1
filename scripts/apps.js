@@ -3,6 +3,7 @@ function init() {
   // * Variables
   const grid = document.querySelector('.grid')
   const livesLeft = document.querySelector('.livesLeft')
+  const header = document.querySelector('p')
 
   const width = 10
   const squareCount = width * width
@@ -88,7 +89,7 @@ function init() {
       console.log('OOPS NOT THERE')
     }
     addPlayer(playerCharacterCurrentPosition)
-    if (playerCharacterCurrentPosition === width - 5) {
+    if (playerCharacterCurrentPosition === width - 6) {
       win()
     }
   }
@@ -136,6 +137,35 @@ function init() {
   }
 
 
+  // * RESET GAME AFTER ALL LIVES LOST OR PLAYER WON
+  function resetGame() {
+    const innerResetDelay = setTimeout(() => {
+      //console.log('game reset, player either lost 3 lives or got to the pub')
+      lives = 3
+      header.innerText = `You have ${lives} lives left` 
+      removePlayer(playerCharacterCurrentPosition)
+      playerCharacterCurrentPosition = playerCharacterStartPosition
+      addPlayer(playerCharacterStartPosition)
+      removeObstacleOne(ObsTypeOneCurrentPosition)
+      ObsTypeOneCurrentPosition = ObsTypeOneStartPosition
+      addObstacleOne(ObsTypeOneStartPosition)
+      removeObstacleTwo(ObsTypeTwoCurrentPosition)
+      ObsTypeTwoCurrentPosition = ObsTypeTwoStartPosition
+      addObstacleTwo(ObsTypeTwoStartPosition)
+      removeObstacleThree(ObsTypeThreeCurrentPosition)
+      ObsTypeThreeCurrentPosition = ObsTypeThreeStartPosition
+      addObstacleThree(ObsTypeThreeStartPosition)
+      removeObstacleFour(ObsTypeFourCurrentPosition)
+      ObsTypeFourCurrentPosition = ObsTypeFourStartPosition
+      addObstacleFour(ObsTypeFourStartPosition)
+      
+    }, 300)
+    
+  }
+
+
+
+
   
   // * Obst ONE movement
   function obstOneMovement() {
@@ -160,6 +190,7 @@ function init() {
       } 
       if (ObsTypeOneCurrentPosition === playerCharacterCurrentPosition){
         collision()
+        
       }
       addObstacleOne(ObsTypeOneCurrentPosition)
     }, 200)
@@ -219,14 +250,24 @@ function init() {
       if (!ObstAtEnd && ObsTypeFourDirection === 1) {
         removeObstacleFour(ObsTypeFourCurrentPosition)
         ObsTypeFourCurrentPosition++
-      } else if (!ObstAtEnd && ObsTypeFourDirection === -1) {
+
+      } else if (ObstAtEnd && ObsTypeFourStartPosition + width) {
+        removeObstacleFour(ObsTypeFourCurrentPosition)
+        ObsTypeFourCurrentPosition = ObsTypeFourCurrentPosition - 10
+        if (ObstAtEnd && !ObsTypeFourStartPosition + width) {
+          ObsTypeFourDirection = -1
+          ObsTypeFourCurrentPosition--
+          removeObstacleFour(ObsTypeFourCurrentPosition)
+        }  
+      } else if (!ObstAtEnd && !ObstAtStart && ObsTypeFourDirection === -1) {
         removeObstacleFour(ObsTypeFourCurrentPosition)
         ObsTypeFourCurrentPosition--
-      } else if (ObstAtEnd) {
-        removeObstacleFour(ObsTypeFourCurrentPosition)
-        ObsTypeFourCurrentPosition--
-        ObsTypeFourDirection = -1
-      }  
+
+      } else if (ObsTypeFourCurrentPosition === ObstAtStart - 10) {
+        ObsTypeFourCurrentPosition = ObsTypeFourCurrentPosition + 10
+        ObsTypeFourDirection = 1
+        ObsTypeFourCurrentPosition++
+      }
       if (ObsTypeFourCurrentPosition === playerCharacterCurrentPosition){
         collision()
       }
@@ -237,39 +278,39 @@ function init() {
 
 
   // * COLLISION DETECTION WHILE HAVE LIVES
+
   function collision() {
     console.log('Wham!') // COLLISION ANIMATION HERE.
+    console.log('header', header)
+    console.log('lives variable', lives)
     // Add sprite changes here //
     removePlayer(playerCharacterCurrentPosition)
     playerCharacterCurrentPosition = playerCharacterStartPosition
     addPlayer(playerCharacterStartPosition)
-    lives--
-    livesLeft.innerText = lives
-    if (lives === 0) {
-      resetGame()
-    }
+    if ((lives >= 0) && (lives !== 0)) {
+      lives--
+      header.innerText = `You have ${lives} lives left`
+      if (lives === 0) {
+        header.innerText = 'You lose!'
+        const resetDelay = setTimeout(() => {
+          resetGame()
+        },200 )
+      }
+    }  
   } 
     
   
-  // * RESET GAME AFTER ALL LIVES LOST OR PLAYER WON
-  function resetGame() {
-    console.log('game reset, player either lost 3 lives or got to the pub')
-    lives = 3
-    removePlayer(playerCharacterCurrentPosition)
-    playerCharacterCurrentPosition = playerCharacterStartPosition
-    addPlayer(playerCharacterStartPosition)
-    removeObstacleOne(ObsTypeOneCurrentPosition)
-    ObsTypeOneCurrentPosition = ObsTypeOneStartPosition
-    addObstacleOne(ObsTypeOneStartPosition)
-    //removeObstacleTwo(ObsTypeTwoCurrentPosition)
-    
-  }
+  
 
-  // * WIN GAME - Player reached the pub! Need ot find where to call this though.
+  // * WIN GAME - Player reached the pub
   function win() {
-    console.log('player reached the pub!')
+    console.log('player reached the pub')
+    header.innerText = 'You reached the pub!'
     //! SOLVE CALLING IMG FROM JS playerCharacter.style.backgroundImage = 'url("/dariakafler/developement/project-1/assets/Red/redfront.png")'
-    //This should be on delay - resetGame()
+    const resetDelay = setTimeout(() => {
+      resetGame()
+    }, 300)
+  
   }
 
   document.addEventListener('keydown', handleKeyStroke)
