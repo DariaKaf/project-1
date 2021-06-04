@@ -1,6 +1,6 @@
 # project-1
 
-// * FROGGER * //
+// * FROGGER TYPE CLONE * //
 
 Requirements
 The game should be playable for one player.
