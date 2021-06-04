@@ -19,9 +19,11 @@ function init() {
   const ObstaclesTypeOne = 'obstacle-type-one'
   const ObstaclesTypeTwo = 'obstacle-type-two'
   const ObstaclesTypeThree = 'obstacle-type-three'
+  const ObstaclesTypeFour = 'obstacle-type-four'
+  const trophy = 'cerveza'
   
-  const ObsTypeOneStartPosition = 81
-  let ObsTypeOneCurrentPosition = 81
+  const ObsTypeOneStartPosition = 80
+  let ObsTypeOneCurrentPosition = 80
   let ObsTypeOneDirection = 1   // 1 is right, -1 is left.
   
   const ObsTypeTwoStartPosition = 79
@@ -31,6 +33,12 @@ function init() {
   const ObsTypeThreeStartPosition = 60
   let ObsTypeThreeCurrentPosition = 60
   let ObsTypeThreeDirection = 1 
+
+  const ObsTypeFourStartPosition = 40
+  let ObsTypeFourCurrentPosition = 40
+  let ObsTypeFourDirection = 1   
+
+  const trophyLoc = 4
 
   // * Making the grid
   function createGrid(playerCharacterStartPosition) {
@@ -44,12 +52,16 @@ function init() {
     addPlayer(playerCharacterStartPosition)
     addObstacleOne(ObsTypeOneStartPosition) 
     addObstacleTwo(ObsTypeTwoStartPosition)
+    addObstacleThree(ObsTypeThreeStartPosition)
+    addObstacleFour(ObsTypeFourStartPosition)
     obstOneMovement()  
     obstTwoMovement()
     obstThreeMovement()
+    obstFourMovement()
+    addtrophy(trophyLoc)
   }
 
-  
+  // * PLAYER CHARACTER ON GRID & MOVEMENT * //
   //* Add player character to grid
   function addPlayer(position) {
     squares[position].classList.add(playerCharacter)
@@ -64,24 +76,24 @@ function init() {
   function handleKeyStroke(event) {
     const key = event.keyCode
     removePlayer(playerCharacterCurrentPosition)
-    if (key === 39 && playerCharacterCurrentPosition % width - 1 !== width - 1) {
+    if (key === 39 && playerCharacterCurrentPosition % width !== width - 1) {
       playerCharacterCurrentPosition++  //RIGHT KEY
     } else if (key === 37 && playerCharacterCurrentPosition % width !== 0 ) {
       playerCharacterCurrentPosition--  //LEFT KEY
     } else if (key === 38 && playerCharacterCurrentPosition >= width) {
-      playerCharacterCurrentPosition -= width - 1 // UP KEY
+      playerCharacterCurrentPosition -= width // UP KEY
     } else if (key === 40 && playerCharacterCurrentPosition + width <= width * width - 1) {
-      playerCharacterCurrentPosition += width - 1 // DOWN KEY
+      playerCharacterCurrentPosition += width // DOWN KEY
     } else {
       console.log('OOPS NOT THERE')
     }
     addPlayer(playerCharacterCurrentPosition)
-    if (playerCharacterCurrentPosition === width - 4) {
+    if (playerCharacterCurrentPosition === width - 5) {
       win()
     }
   }
 
-  // * ADD OBSTACLES
+  // * OBSTACLES ON GRID & MOVEMENT * //
   
   //* Add obstacle type ONE to grid  
   function addObstacleOne(ObsOnePosition) {
@@ -91,7 +103,6 @@ function init() {
   function removeObstacleOne(ObsOnePosition) {
     squares[ObsOnePosition].classList.remove(ObstaclesTypeOne)
   }
-
   // * Add Obstacle Type TWO
   function addObstacleTwo(ObsTwoPosition) {
     squares[ObsTwoPosition].classList.add(ObstaclesTypeTwo)
@@ -102,15 +113,27 @@ function init() {
   }
 
   // * Add Obstacle Type THREE
-  function addObstacleThree(ObsTwoPosition) {
-    squares[ObsTwoPosition].classList.add(ObstaclesTypeThree)
+  function addObstacleThree(ObsThreePosition) {
+    squares[ObsThreePosition].classList.add(ObstaclesTypeThree)
   }
   // * Remove obstacle type THREE
   function removeObstacleThree(ObsThreePosition) {
     squares[ObsThreePosition].classList.remove(ObstaclesTypeThree)
   }
+  // * Add Obstacle Type FOUR
+  function addObstacleFour(ObsFourPosition) {
+    squares[ObsFourPosition].classList.add(ObstaclesTypeFour)
+  }
+  // * Remove obstacle type FOUR
+  function removeObstacleFour(ObsFourPosition) {
+    squares[ObsFourPosition].classList.remove(ObstaclesTypeFour)
+  }
 
 
+  // * Add trophy
+  function addtrophy(trophyPosition) {
+    squares[trophyPosition].classList.add(trophy)
+  }
 
 
   
@@ -164,6 +187,7 @@ function init() {
       }
       addObstacleTwo(ObsTypeTwoCurrentPosition)
     }, 200)
+    
   }
 
   // * Obst THREE movement
@@ -176,6 +200,7 @@ function init() {
         removeObstacleThree(ObsTypeThreeCurrentPosition)
         ObsTypeThreeCurrentPosition++
         ObsTypeThreeDirection = 1
+        removeObstacleThree(ObsTypeThreeCurrentPosition)
       } else if (ObstAtEnd) {
         removeObstacleThree(ObsTypeThreeCurrentPosition)
       } 
@@ -185,6 +210,30 @@ function init() {
       addObstacleThree(ObsTypeThreeCurrentPosition)
     }, 200)
   }
+  // * Obst Four movement
+  function obstFourMovement() {
+    const timerFour = setInterval(() => {
+      const ObstAtStart = ObsTypeFourCurrentPosition === ObsTypeOneStartPosition
+      const ObstAtEnd = ObsTypeFourCurrentPosition % width === width - 1
+      
+      if (!ObstAtEnd && ObsTypeFourDirection === 1) {
+        removeObstacleFour(ObsTypeFourCurrentPosition)
+        ObsTypeFourCurrentPosition++
+      } else if (!ObstAtEnd && ObsTypeFourDirection === -1) {
+        removeObstacleFour(ObsTypeFourCurrentPosition)
+        ObsTypeFourCurrentPosition--
+      } else if (ObstAtEnd) {
+        removeObstacleFour(ObsTypeFourCurrentPosition)
+        ObsTypeFourCurrentPosition--
+        ObsTypeFourDirection = -1
+      }  
+      if (ObsTypeFourCurrentPosition === playerCharacterCurrentPosition){
+        collision()
+      }
+      addObstacleFour(ObsTypeFourCurrentPosition)
+    }, 200)
+  }
+
 
 
   // * COLLISION DETECTION WHILE HAVE LIVES
@@ -219,7 +268,8 @@ function init() {
   // * WIN GAME - Player reached the pub! Need ot find where to call this though.
   function win() {
     console.log('player reached the pub!')
-    resetGame()
+    //! SOLVE CALLING IMG FROM JS playerCharacter.style.backgroundImage = 'url("/dariakafler/developement/project-1/assets/Red/redfront.png")'
+    //This should be on delay - resetGame()
   }
 
   document.addEventListener('keydown', handleKeyStroke)

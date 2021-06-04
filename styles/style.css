@@ -24,7 +24,7 @@ body {
 .grid-wrap {
   height: 100vh;
   margin: 0;
-  background-image: url('../assets/BackgroundGridfinal.png');
+  background-image: url('../assets/BackgroundGrid\(1\).png');
   background-repeat: no-repeat;
 }
 
@@ -39,8 +39,8 @@ body {
 }
 
 .grid div {
-  border: 1px solid rgba(148, 148, 148, 0.5);
-  color: rgba(148, 148, 148, 0.5);
+  /* border: 1px solid rgba(148, 148, 148, 0.5); */
+  color: rgba(148, 148, 148, 1);
   flex-grow: 1;
   height: 10%;
   width: 10%;
@@ -69,7 +69,21 @@ body {
 }
 
 .grid div.obstacle-type-three {
-  background-image: url("../assets/cars/red-car-right.png");
+  background-image: url("../assets/cars/blue-car-right.png");
   background-repeat: no-repeat;
   background-size: contain;
+
+}
+
+.grid div.obstacle-type-four {
+  background-image: url("../assets/skate1.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+
+}
+
+
+.cerveza {
+  background-image: url('../assets/cerveza.png');
+  background-repeat: repeat-x;
 }
