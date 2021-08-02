@@ -1,5 +1,6 @@
 # Project: “Get to the pub” 
 A 7 day solo project to create a frogger-type game, to solidify Javascript knowledge.
+First project as part of the General Assembly Full-Stack course, following 4 weeks of learning.
 
 So much has happened during 2020-2021, and you’re so close to putting it behind you forever. All you need now is to get to the pub safely.
 
