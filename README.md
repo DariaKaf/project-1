@@ -1,13 +1,18 @@
-# project-1
+# Project: “Get to the pub” 
+A 7 day solo project to create a frogger-type game, to solidify Javascript knowledge.
 
-// * FROGGER TYPE CLONE * //
+So much has happened during 2020-2021, and you’re so close to putting it behind you forever. All you need now is to get to the pub safely.
 
-Requirements
+### Tools used: Vanilla JavaScript (ES6), HTML5, CSS3, Procreate, Git & GitHub, yarn.
+
+
+
+### Requirements
 The game should be playable for one player.
 The obstacles should be auto generated.
 
 
-Challenges
+### Challenges
 The main difficulty here is animating the obstacles and detecting collision. 
 There will be a number of timers to manage across the whole game, which can be easily get out of hand.
 
