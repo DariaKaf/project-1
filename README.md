@@ -10,9 +10,9 @@ A 7 day solo project to create a single page game using vanilla Javascript. This
 * GIMP
 
 ## The game: "Get to the pub"
-![Get to the pub](https://raw.githubusercontent.com/daria-kafler/GA-SEI-project-1-JavaScript-Game/main/assets/Screenshot%202021-08-09%20at%2009.58.18.png)
+![Get to the pub](https://raw.githubusercontent.com/daria-kafler/GA-SEI56-Project-01/main/assets/Project01Screenshot.jpg)
 
-You can check it out here >>> [https://daria-kafler.github.io/GA-SEI-project-1-JavaScript-Game/](https://daria-kafler.github.io/GA-SEI-project-1-JavaScript-Game/) 
+You can check it out here >>> [https://daria-kafler.github.io/GA-SEI56-Project-01/](https://daria-kafler.github.io/GA-SEI56-Project-01/) 
 
 So much has happened during 2020-2021, and you’re so close to putting it behind you forever. 
 Use the ← ↑ ↓ →  keys to get to the pub safely.
