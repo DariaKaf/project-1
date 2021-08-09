@@ -1,75 +1,32 @@
-# Project: “Get to the pub” 
-A 7 day solo project to create a frogger-type game, to solidify Javascript knowledge.
-First project as part of the General Assembly Full-Stack course, following 4 weeks of learning.
+# Project 1 with Genereal Assembly: Vanilla Javascript game.
+A 7 day solo project to create a single page game using vanilla Javascript. This was the first project as part of the General Assembly Full-Stack course, following 4 weeks of learning.
 
-So much has happened during 2020-2021, and you’re so close to putting it behind you forever. All you need now is to get to the pub safely.
+## Technologies used: 
+* Vanilla JavaScript (ES6)
+* HTML5
+* CSS3
+* Git & GitHub
+* Procreate
+* GIMP
 
-### Tools used: Vanilla JavaScript (ES6), HTML5, CSS3, Procreate, Git & GitHub, yarn.
+## The game: "Get to the pub"
+![Get to the pub](https://raw.githubusercontent.com/daria-kafler/GA-SEI-project-1-JavaScript-Game/main/assets/Screenshot%202021-08-09%20at%2009.58.18.png)
+
+You can check it out here >>> [https://daria-kafler.github.io/GA-SEI-project-1-JavaScript-Game/](https://daria-kafler.github.io/GA-SEI-project-1-JavaScript-Game/) 
+
+So much has happened during 2020-2021, and you’re so close to putting it behind you forever. 
+Use the ← ↑ ↓ →  keys to get to the pub safely.
 
 
+### Game brief and requirements
+* The game should be playable for one player.
+* The obstacles should be auto generated.
 
-### Requirements
-The game should be playable for one player.
-The obstacles should be auto generated.
+The idea of a Frogger type game is to guide a family of frogs across a road, and a river to their homes at the top of the screen.
+To make things more challenging there are numerous moving obstacles that the frogs must avoid to reach their destination.
 
 
 ### Challenges
 The main difficulty here is animating the obstacles and detecting collision. 
 There will be a number of timers to manage across the whole game, which can be easily get out of hand.
 
-====== MVP ======
-
-base logic
-css (gifs also)
-
-<!-- * VARIABLES TO STORE EVERYTHING
-  GRID
-    FUNCTION TO GENERATE GRID   
-
-
-
-Player, player position
-Obstacles, obstacle types, obstacles position
-Score count - localStorage
-
-* MAKE A GRID
-According to Charlottes lesson.
-
-* ADD AND MOVE PLAYER
-According to Charlottes lesson.
-Would use Keyup -->
-
-* ENLARGE PLAYER AND OBSTACLES
-  WAY ONE
-    Purely CSS - Class of player assigned to one div, Collision detectin will be only one square.
-  WAY TWO - harder
-    Find a way to clump together divs and track their position - should allow for detection collision on all squares in class.
-    ^^^^^ NEED THIS ANYWAY TO BUILD OBSTACLE FORMATIONS
-
-* GENERATE AND MOVE OBSTACLES -----
------ THESE TO BE INCORPORATED INTO CREATE GRID??? ----
-  GENERATE
-    const ObstaclesTypeOne = 'obstacleTypeOne'
-    const ObstaclesTypeTwo = 'obstacleTypeTwo'
-    const ObstaclesTypeThree = 'obstacleTypeThree'
-    squares[position].classList.add(ObstaclesTypeOne)
-    squares[position].classList.add(ObstaclesTypeTwo)
-    squares[position].classList.add(ObstaclesTypeThree)
-
-  INTERVALS
-    Obstacles Auto generate and move in certain areas only 
-    Interval function to add/remove Special class group for certain areas of the grid? 
-  
-    Obstacles MOVE with Intervals.
-
-* DETECT COLLISION
-Condition for if player-class tries to access same grid positin as obstacle-class?
-
-* FUNCTION FOR COLLISION - WHEN PLAYER TOUCHES OBSTACLE
-Does player lose life or gets damage? Maybe some obstacles are actually beneficial? 
-
-* MAKE DESTINATION
-What happnes when player reaches other side of screen?
-
-  WIN -  player reaches destination
-  LOSE - player collides 3 times
